@@ -1,0 +1,1 @@
+const String newAPIBaseUrl = 'https://newsapi.org/v2';

@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-//entities are used by persentation layer of app
+// Entities will be used by presentation layer
 class ArticleEntity extends Equatable {
+  String? id;
   String? author;
   String? title;
   String? description;
@@ -11,7 +12,8 @@ class ArticleEntity extends Equatable {
   String? content;
 
   ArticleEntity(
-      {this.author,
+      {this.id,
+      this.author,
       this.title,
       this.description,
       this.url,
@@ -21,6 +23,15 @@ class ArticleEntity extends Equatable {
 
   @override
   List<Object?> get props {
-    return [author, title, description, url, urlToImage, publishedAt, content];
+    return [
+      id,
+      author,
+      title,
+      description,
+      url,
+      urlToImage,
+      publishedAt,
+      content
+    ];
   }
 }
