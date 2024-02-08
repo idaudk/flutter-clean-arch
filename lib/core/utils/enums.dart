@@ -1,0 +1,1 @@
+enum BlocsStates{intial, loading, loaded, error}

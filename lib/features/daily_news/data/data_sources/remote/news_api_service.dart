@@ -1,8 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:goto_app/core/constants/constants.dart';
 import 'package:goto_app/features/daily_news/data/model/article.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
-import 'package:dio/dio.dart';
 
 part 'news_api_service.g.dart';
 

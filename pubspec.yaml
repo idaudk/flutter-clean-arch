@@ -59,6 +59,9 @@ dependencies:
   
   #hooks
   flutter_hooks: ^0.20.5
+
+  #routing
+  go_router: ^13.1.0
   
 
 dev_dependencies:

@@ -30,22 +30,22 @@ class ArticleResponse {
 }
 
 class ArticleModel extends ArticleEntity {
-  String? author;
-  String? title;
-  String? description;
-  String? url;
-  String? urlToImage;
-  String? publishedAt;
-  String? content;
+  // String? author;
+  // String? title;
+  // String? description;
+  // String? url;
+  // String? urlToImage;
+  // String? publishedAt;
+  // String? content;
 
-  ArticleModel(
-      {this.author,
-      this.title,
-      this.description,
-      this.url,
-      this.urlToImage,
-      this.publishedAt,
-      this.content});
+  // ArticleModel(
+  //     {this.author,
+  //     this.title,
+  //     this.description,
+  //     this.url,
+  //     this.urlToImage,
+  //     this.publishedAt,
+  //     this.content});
 
   ArticleModel.fromJson(Map<String, dynamic> json) {
     author = json['author'];

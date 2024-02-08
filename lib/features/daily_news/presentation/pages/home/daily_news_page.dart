@@ -1,10 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goto_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DailyNewsPage extends StatelessWidget {
+class DailyNewsPage extends StatefulWidget {
   const DailyNewsPage({super.key});
+
+  @override
+  State<DailyNewsPage> createState() => _DailyNewsPageState();
+}
+
+class _DailyNewsPageState extends State<DailyNewsPage> {
+  @override
+  void initState() {
+    context.read<RemoteArticleBloc>().add(const RemoteArticleGetEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +29,11 @@ class DailyNewsPage extends StatelessWidget {
   _buildAppbar() {
     return AppBar(
       title: const Text('Daily News'),
+      leading: IconButton.outlined(
+          onPressed: () {
+            context.pushNamed('search-product');
+          },
+          icon: const Icon(CupertinoIcons.search)),
     );
   }
 

@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:goto_app/core/resources/data_states.dart';
 import 'package:goto_app/features/daily_news/domain/entities/articles.dart';
-import 'package:dio/dio.dart';
 import 'package:goto_app/features/daily_news/domain/usecases/get_article.dart';
 
 part 'remote_article_event.dart';

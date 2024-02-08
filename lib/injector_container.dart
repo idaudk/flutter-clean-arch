@@ -5,6 +5,11 @@ import 'package:goto_app/features/daily_news/data/repository/article_repo_impl.d
 import 'package:goto_app/features/daily_news/domain/repository/article_repository.dart';
 import 'package:goto_app/features/daily_news/domain/usecases/get_article.dart';
 import 'package:goto_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:goto_app/features/products/data/data_sources/remote/product_api_service.dart';
+import 'package:goto_app/features/products/data/repository/product_repo_impl.dart';
+import 'package:goto_app/features/products/domain/repository/product_repo.dart';
+import 'package:goto_app/features/products/domain/usecases/search_product.dart';
+import 'package:goto_app/features/products/presentation/bloc/search/search_product_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -19,17 +24,26 @@ Future<void> initDependencies() async {
 
   // -API SERVICES
   sl.registerSingleton<NewsApiService>(NewsApiService(sl<Dio>()));
+  sl.registerSingleton<ProductApiService>(ProductApiService(sl<Dio>()));
 
   // -REPOS
   sl.registerSingleton<ArticleRepository>(
       ArticleRepositoryImpl(sl<NewsApiService>()));
 
+  sl.registerSingleton<ProductRepository>(
+      ProductRepoImpl(sl<ProductApiService>()));
+
   //USECASES
   sl.registerSingleton<GetArticleUseCase>(
       GetArticleUseCase(sl<ArticleRepository>()));
+
+  sl.registerSingleton<SearchProductUseCase>(
+      SearchProductUseCase(sl<ProductRepository>()));
 
   //INFO: BLOCS SHOULD NOT BE REGISTER AS SINGLETON BECAUSE IT WILL RETURN A NEW INSTANCE WHEN STATE IS CHANGED
   //BLOCS
   sl.registerFactory<RemoteArticleBloc>(
       () => RemoteArticleBloc(sl<GetArticleUseCase>()));
+
+  sl.registerFactory<SearchProductBloc>(() => SearchProductBloc(sl<SearchProductUseCase>()));
 }
