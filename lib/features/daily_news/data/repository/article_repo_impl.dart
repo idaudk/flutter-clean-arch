@@ -19,7 +19,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
           apiKey: newsAPIKey, category: categoryQuery, country: countryQuery);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        return DataSuccess(httpResponse.data.articles!);
       } else {
         return DataFailed(DioException(
             requestOptions: httpResponse.response.requestOptions,

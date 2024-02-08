@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+
+// 1st step
 // Entities will be used by presentation layer
 class ArticleEntity extends Equatable {
   String? id;
