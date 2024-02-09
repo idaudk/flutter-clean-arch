@@ -15,13 +15,13 @@ class SearchProductState extends Equatable {
   SearchProductState copyWith({
     List<ProductEntity>? searchResults,
     BlocsStates? blocsStates,
-    DioExceptionType? errorType,
+  
     String? message,
   }) {
     return SearchProductState(
         blocsStates: blocsStates ?? this.blocsStates,
         searchResults: searchResults ?? this.searchResults,
-        errorType: errorType ?? this.errorType,
+       
         message: message ?? this.message);
   }
 

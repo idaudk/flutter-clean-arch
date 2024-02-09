@@ -22,7 +22,10 @@ Future<void> initDependencies() async {
   sl.registerSingleton<Logger>(Logger());
 
   //DIO
-  sl.registerSingleton<Dio>(Dio());
+  sl.registerSingleton<Dio>(Dio())
+    ..options.connectTimeout = const Duration(seconds: 10) // Connect timeout
+    ..options.sendTimeout = const Duration(seconds: 10) // Write timeout
+    ..options.receiveTimeout = const Duration(seconds: 10);
 
   //DEPENDENCIES
 

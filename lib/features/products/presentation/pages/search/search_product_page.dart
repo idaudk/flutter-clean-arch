@@ -50,32 +50,39 @@ class SearchProductPage extends StatelessWidget {
             Expanded(
               child: BlocBuilder<SearchProductBloc, SearchProductState>(
                   builder: (context, state) {
+                //LOADING STATE
                 if (state.blocsStates == BlocsStates.loading) {
                   return const Center(
                     child: CupertinoActivityIndicator(),
                   );
                 }
+                //ERROR STATE
                 if (state.blocsStates == BlocsStates.error) {
                   return Center(
-                    child: Text(state.errorType.name),
+                    child: Text(state.message),
                   );
                 }
+                //LOADED STATE
                 if (state.blocsStates == BlocsStates.loaded) {
                   return Center(
-                      child: ListView.builder(
-                          itemCount: state.searchResults.length,
-                          itemBuilder: (context, index) {
-                            var product = state.searchResults[index];
-                            return ListTile(
-                              title: Text(product.title.toString()),
-                            );
-                          }));
+                      child: state.searchResults.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: state.searchResults.length,
+                              itemBuilder: (context, index) {
+                                var product = state.searchResults[index];
+                                return ListTile(
+                                  title: Text(product.title.toString()),
+                                );
+                              })
+                          : const Text('found nothing'));
                 }
+                //INTIAL STATE
                 if (state.blocsStates == BlocsStates.intial) {
                   return const Center(
                     child: Text('initial state'),
                   );
                 }
+
                 return const Center(
                   child: Text('unknown Error'),
                 );

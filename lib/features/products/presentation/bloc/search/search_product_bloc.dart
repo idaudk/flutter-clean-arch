@@ -35,11 +35,11 @@ class SearchProductBloc extends Bloc<SearchProductEvent, SearchProductState> {
 
       emit(state.copyWith(
         blocsStates: BlocsStates.error,
-        errorType: dataState.error?.type ?? DioExceptionType.unknown,
+        message: DioExceptionHandler.handleException(dataState.error!),
       ));
     }
 
-    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
+    if (dataState is DataSuccess) {
       emit(state.copyWith(
           blocsStates: BlocsStates.loaded, searchResults: dataState.data));
     }
