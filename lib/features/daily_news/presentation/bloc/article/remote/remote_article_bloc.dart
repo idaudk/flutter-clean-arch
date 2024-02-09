@@ -10,6 +10,7 @@ import 'package:goto_app/features/daily_news/domain/entities/articles.dart';
 import 'package:goto_app/features/daily_news/domain/usecases/get_article.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../../core/resources/exception_handler.dart';
 import '../../../../../../injector_container.dart';
 
 part 'remote_article_event.dart';
@@ -32,10 +33,11 @@ class RemoteArticleBloc extends Bloc<RemoteArticleEvent, RemoteArticleState> {
 
     if (dataState is DataFailed) {
       sl<Logger>().e('Exception', error: dataState.error);
+      
       emit(ArticleRemoteError(dataState.error!));
     }
 
-    if (dataState is DataSuccess) {
+    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
       emit(ArticleRemoteDone(dataState.data!));
     }
   }

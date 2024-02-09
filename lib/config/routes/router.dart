@@ -23,7 +23,7 @@ final router = GoRouter(
       path: '/search-product',
       builder: (context, state) => BlocProvider<SearchProductBloc>(
         create: (context) => sl(),
-        child: const SearchProductPage(),
+        child: SearchProductPage(),
       ),
     ),
   ],

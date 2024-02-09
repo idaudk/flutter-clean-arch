@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goto_app/core/resources/exception_handler.dart';
 import 'package:goto_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,7 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
         }
         if (state is ArticleRemoteError) {
           return Center(
-            child: Text(state.error?.type.name.toString() ?? 'Unknown Error'),
+            child: Text(DioExceptionHandler.handleException(state.error!)),
           );
         }
         if (state is ArticleRemoteDone) {

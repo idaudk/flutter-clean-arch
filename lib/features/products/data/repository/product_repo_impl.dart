@@ -14,28 +14,20 @@ class ProductRepoImpl implements ProductRepository {
 
   @override
   Future<DataState<List<ProductModel>>> getProducts() {
-    // TODO: implement getProducts
     throw UnimplementedError();
   }
 
   @override
-  Future<DataState<List<ProductModel>>> searchProducts() async {
+  Future<DataState<List<ProductModel>>> searchProducts(String searchQuery) async {
     try {
-      final httpResponse = await _productApiService.searchProducts(q: 'iphone');
-      log('ProductRepoImpl : ');
-      log(httpResponse.response.toString());
-    //  log(httpResponse.data.toString());
+      final httpResponse = await _productApiService.searchProducts(q: searchQuery);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data.products!);
       } else {
         return DataFailed(DioException(
-            error: httpResponse.response.statusMessage,
             response: httpResponse.response,
-            message: httpResponse.response.statusMessage,
-            requestOptions: httpResponse.response.requestOptions
-         
-            ));
+            requestOptions: httpResponse.response.requestOptions));
       }
     } on DioException catch (e) {
       return DataFailed(e);

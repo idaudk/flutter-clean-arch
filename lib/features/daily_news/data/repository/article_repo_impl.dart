@@ -27,12 +27,12 @@ class ArticleRepoImpl implements ArticleRepository {
       } else {
         return DataFailed(DioException(
             requestOptions: httpResponse.response.requestOptions,
-            error: httpResponse.response.statusMessage,
-            type: DioExceptionType.badResponse,
+            // error: httpResponse.response.statusMessage,
+            // type: DioExceptionType.badResponse,
             response: httpResponse.response));
       }
     } on DioException catch (e) {
       return DataFailed(e);
-    }
+    } 
   }
 }
