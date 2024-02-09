@@ -1,16 +1,25 @@
-# goto_app
+# goto_app (Clean Architecture implementation)
 
-A new Flutter project.
+goto_app is a meticulously crafted Flutter project serving as a reference for implementing Clean Architecture in your future Flutter endeavors. Whether you're a seasoned developer or just starting out, this project provides valuable insights into:
 
-## Getting Started
+* Structuring your codebase
+* Managing state
+* Handling navigation
+* Integrating external services
+## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Clean Architecture Implementation:
+* Follows the principles of Clean Architecture to ensure separation of concerns.
+* Layers (domain, data, presentation) are well-defined for maintainability and testability.
+#### BLoC State Management:
+* Utilizes the BLoC pattern for managing app state.
+* Demonstrates how to handle business logic and UI updates effectively.
+#### Robust Routing with GoRouter:
+* Implements routing using the GoRouter package.
+* Seamlessly navigates users between different screens.
+#### Dependency Injection using GetIt:
+* Leverages GetIt for service location and dependency injection.
+* Manages dependencies across the app.
+#### Efficient Network Requests with Dio:
+* Makes API requests using the Dio package.
+* Handles exceptions gracefully for robust network communication.
