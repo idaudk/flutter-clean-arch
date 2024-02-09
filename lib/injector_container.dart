@@ -10,6 +10,7 @@ import 'package:goto_app/features/products/data/repository/product_repo_impl.dar
 import 'package:goto_app/features/products/domain/repository/product_repo.dart';
 import 'package:goto_app/features/products/domain/usecases/search_product.dart';
 import 'package:goto_app/features/products/presentation/bloc/search/search_product_bloc.dart';
+import 'package:logger/logger.dart';
 
 final sl = GetIt.instance;
 
@@ -17,6 +18,9 @@ final sl = GetIt.instance;
 //REGISTER FACTORY   -> RETURN NEW INSTANCE
 
 Future<void> initDependencies() async {
+  //LOGGER
+  sl.registerSingleton<Logger>(Logger());
+
   //DIO
   sl.registerSingleton<Dio>(Dio());
 
@@ -28,14 +32,14 @@ Future<void> initDependencies() async {
 
   // -REPOS
   sl.registerSingleton<ArticleRepository>(
-      ArticleRepositoryImpl(sl<NewsApiService>()));
+      ArticleRepoImpl(newsApiService: sl()));
 
   sl.registerSingleton<ProductRepository>(
       ProductRepoImpl(sl<ProductApiService>()));
 
   //USECASES
   sl.registerSingleton<GetArticleUseCase>(
-      GetArticleUseCase(sl<ArticleRepository>()));
+      GetArticleUseCase(articleRepository: sl()));
 
   sl.registerSingleton<SearchProductUseCase>(
       SearchProductUseCase(sl<ProductRepository>()));
@@ -45,5 +49,6 @@ Future<void> initDependencies() async {
   sl.registerFactory<RemoteArticleBloc>(
       () => RemoteArticleBloc(sl<GetArticleUseCase>()));
 
-  sl.registerFactory<SearchProductBloc>(() => SearchProductBloc(sl<SearchProductUseCase>()));
+  sl.registerFactory<SearchProductBloc>(
+      () => SearchProductBloc(sl<SearchProductUseCase>()));
 }

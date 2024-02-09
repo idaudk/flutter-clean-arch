@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -6,12 +7,15 @@ import 'package:goto_app/core/resources/data_states.dart';
 import 'package:goto_app/features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'package:goto_app/features/daily_news/data/model/article.dart';
 import 'package:goto_app/features/daily_news/domain/repository/article_repository.dart';
+import 'package:goto_app/injector_container.dart';
+import 'package:logger/logger.dart';
 
-class ArticleRepositoryImpl implements ArticleRepository {
+class ArticleRepoImpl implements ArticleRepository {
   final NewsApiService _newsApiService;
 
-  const ArticleRepositoryImpl(this._newsApiService);
-  //instead of article entity, we have to use article model from data layer
+  ArticleRepoImpl({required NewsApiService newsApiService})
+      : _newsApiService = newsApiService;
+
   @override
   Future<DataState<List<ArticleModel>>> getNewsArticles() async {
     try {
@@ -24,10 +28,10 @@ class ArticleRepositoryImpl implements ArticleRepository {
         return DataFailed(DioException(
             requestOptions: httpResponse.response.requestOptions,
             error: httpResponse.response.statusMessage,
-            type: DioExceptionType.unknown,
+            type: DioExceptionType.badResponse,
             response: httpResponse.response));
       }
-    } on DioException catch (e){
+    } on DioException catch (e) {
       return DataFailed(e);
     }
   }

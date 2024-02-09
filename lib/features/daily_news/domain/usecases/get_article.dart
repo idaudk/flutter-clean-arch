@@ -8,12 +8,11 @@ import 'package:goto_app/features/daily_news/domain/repository/article_repositor
 
 class GetArticleUseCase
     implements UseCase<DataState<List<ArticleEntity>>, void> {
-  // get data from the repo
   final ArticleRepository _articleRepository;
 
-  GetArticleUseCase(this._articleRepository);
+  GetArticleUseCase({required ArticleRepository articleRepository})
+      : _articleRepository = articleRepository;
 
-  // IN DART CALL CAN BE CALLED BY USING CLASS NAME OBJECT.CALL() AND ALSO BY OBJECT()
   @override
   Future<DataState<List<ArticleEntity>>> call({void params}) {
     return _articleRepository.getNewsArticles();

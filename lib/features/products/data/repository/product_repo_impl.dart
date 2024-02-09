@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 
@@ -21,15 +22,20 @@ class ProductRepoImpl implements ProductRepository {
   Future<DataState<List<ProductModel>>> searchProducts() async {
     try {
       final httpResponse = await _productApiService.searchProducts(q: 'iphone');
+      log('ProductRepoImpl : ');
+      log(httpResponse.response.toString());
+    //  log(httpResponse.data.toString());
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data.products!);
       } else {
         return DataFailed(DioException(
-            requestOptions: httpResponse.response.requestOptions,
             error: httpResponse.response.statusMessage,
-            type: DioExceptionType.unknown,
-            response: httpResponse.response));
+            response: httpResponse.response,
+            message: httpResponse.response.statusMessage,
+            requestOptions: httpResponse.response.requestOptions
+         
+            ));
       }
     } on DioException catch (e) {
       return DataFailed(e);

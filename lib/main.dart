@@ -21,10 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       routerConfig: router,
-      // home: BlocProvider<RemoteArticleBloc>(
-      //     create: (context) => sl()
-      //       ..add(const RemoteArticleGetEvent()),
-      //     child: const DailyNewsPage()),
+      
     );
   }
 }

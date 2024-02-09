@@ -40,17 +40,17 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
   _buildBody() {
     return BlocBuilder<RemoteArticleBloc, RemoteArticleState>(
       builder: (context, state) {
-        if (state is RemoteArticleLoading) {
+        if (state is ArticleReinmoteLoadg) {
           return const Center(
             child: CupertinoActivityIndicator(),
           );
         }
-        if (state is RemoteArticleError) {
+        if (state is ArticleRemoteError) {
           return Center(
-            child: Text(state.error!.message.toString()),
+            child: Text(state.error?.type.name.toString() ?? 'Unknown Error'),
           );
         }
-        if (state is RemoteArticleDone) {
+        if (state is ArticleRemoteDone) {
           return ListView.builder(
               itemCount: state.articles!.length,
               itemBuilder: (context, index) {

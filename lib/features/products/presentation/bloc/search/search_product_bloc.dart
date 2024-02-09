@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -24,23 +25,32 @@ class SearchProductBloc extends Bloc<SearchProductEvent, SearchProductState> {
     //emiting loading state
     emit(state.copyWith(blocsStates: BlocsStates.loading));
     //calling api
-    final dataState = await _searchProductUseCase.call();
-    //checking data from api call
-    if (dataState.data!.isNotEmpty && dataState is DataSuccess) {
-      print('************************* loaded ************************');
 
-      emit(state.copyWith(
-        blocsStates: BlocsStates.loaded,
-        searchResults: dataState.data,
-      ));
+    try {
+      final dataState = await _searchProductUseCase.call();
+      log(dataState.toString());
+    } catch (e, s) {
+      print(s);
+      throw Exception(
+          "Problem while JSON decoding results. [error=${e.toString()}]");
     }
-    if (dataState is DataFailed) {
-      print('************************* error ************************');
-      print(dataState.error);
-      emit(state.copyWith(
-          blocsStates: BlocsStates.error,
-          errorType: dataState.error?.type ?? DioExceptionType.unknown,
-          message: dataState.error?.message ?? 'nil'));
-    }
+
+    // // checking data from api call
+    // if (dataState.data!.isNotEmpty && dataState is DataSuccess) {
+    //   log('************************* loaded ************************');
+
+    //   emit(state.copyWith(
+    //     blocsStates: BlocsStates.loaded,
+    //     searchResults: dataState.data,
+    //   ));
+    // }
+    // if (dataState is DataFailed) {
+    //   log('************************* error ************************');
+    //   log(dataState.error.toString());
+    //   emit(state.copyWith(
+    //       blocsStates: BlocsStates.error,
+    //       errorType: dataState.error?.type ?? DioExceptionType.unknown,
+    //       message: dataState.error?.message ?? 'nil'));
+    // }
   }
 }
