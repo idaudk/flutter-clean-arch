@@ -1,6 +1,6 @@
-# goto_app (Clean Architecture implementation)
+# Clean Architecture implementation
 
-goto_app is a meticulously crafted Flutter project serving as a reference for implementing Clean Architecture in your future Flutter endeavors. Whether you're a seasoned developer or just starting out, this project provides valuable insights into:
+A meticulously crafted Flutter project serving as a reference for implementing Clean Architecture in your future Flutter endeavors. Whether you're a seasoned developer or just starting out, this project provides valuable insights into:
 
 * Structuring your codebase
 * Managing state
